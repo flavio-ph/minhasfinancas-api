@@ -3,7 +3,6 @@ package com.flavio.minhasfinancas.model.entity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
-
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import com.flavio.minhasfinancas.model.enums.Status;
@@ -22,10 +21,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table (name = "lancamento", schema = "financas")
+@Table(name = "lancamento", schema = "financas")
 public class Lancamento {
 	
-	@Id 
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
@@ -33,26 +32,25 @@ public class Lancamento {
 	@Column(name = "descricao")
 	private String descricao;
 	
-
-	@Column (name = "mes")
-	private int mes;
+	@Column(name = "mes")
+	private Integer mes;
 	
-	@Column (name = "name")
+	@Column(name = "ano")
 	private Integer ano;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_usuario") //a anotação JoinColumn indica que a coluna em questão tem relacionamento entre entidades,no caso entre as entidades relacionamento e usuario;
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-	
-	@Column (name = "valor")
+
+	@Column(name = "valor")
 	private BigDecimal valor;
 	
-	@Column (name = "data_cadastro")
+	@Column(name = "data_cadastro")
 	@Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
-	private LocalDate DataCadastro;
+	private LocalDate dataCadastro;
 	
-	@Column (name = "tipo")
-	@Enumerated (value = EnumType.STRING)
+	@Column(name = "tipo")
+	@Enumerated(EnumType.STRING)
 	private TipoDeLancamento tipo;
 	
 	@Column(name = "estatus")
@@ -108,11 +106,11 @@ public class Lancamento {
 	}
 
 	public LocalDate getDataCadastro() {
-		return DataCadastro;
+		return dataCadastro;
 	}
 
 	public void setDataCadastro(LocalDate dataCadastro) {
-		DataCadastro = dataCadastro;
+		this.dataCadastro = dataCadastro;
 	}
 
 	public TipoDeLancamento getTipo() {
@@ -133,7 +131,7 @@ public class Lancamento {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(DataCadastro, ano, descricao, id, mes, status, tipo, usuario, valor);
+		return Objects.hash(ano, dataCadastro, descricao, id, mes, status, tipo, usuario, valor);
 	}
 
 	@Override
@@ -145,19 +143,35 @@ public class Lancamento {
 		if (getClass() != obj.getClass())
 			return false;
 		Lancamento other = (Lancamento) obj;
-		return Objects.equals(DataCadastro, other.DataCadastro) && ano == other.ano
-				&& Objects.equals(descricao, other.descricao) && Objects.equals(id, other.id) && mes == other.mes
-				&& status == other.status && tipo == other.tipo && Objects.equals(usuario, other.usuario)
-				&& Objects.equals(valor, other.valor);
+		return Objects.equals(ano, other.ano) && Objects.equals(dataCadastro, other.dataCadastro)
+				&& Objects.equals(descricao, other.descricao) && Objects.equals(id, other.id)
+				&& Objects.equals(mes, other.mes) && status == other.status && tipo == other.tipo
+				&& Objects.equals(usuario, other.usuario) && Objects.equals(valor, other.valor);
 	}
 
-	@Override
-	public String toString() {
-		return "Lancamento [id=" + id + ", descricao=" + descricao + ", mes=" + mes + ", ano=" + ano + ", usuario="
-				+ usuario + ", valor=" + valor + ", DataCadastro=" + DataCadastro + ", tipo=" + tipo + ", status="
-				+ status + "]";
-	} 
+	public Lancamento(Long id, String descricao, Integer mes, Integer ano, Usuario usuario, BigDecimal valor,
+			LocalDate dataCadastro, TipoDeLancamento tipo, Status status) {
+		super();
+		this.id = id;
+		this.descricao = descricao;
+		this.mes = mes;
+		this.ano = ano;
+		this.usuario = usuario;
+		this.valor = valor;
+		this.dataCadastro = dataCadastro;
+		this.tipo = tipo;
+		this.status = status;
+	}
+
+	public Lancamento() {
+		super();
+	}
+	
+	
+	
 	
 	
 	
 }
+
+

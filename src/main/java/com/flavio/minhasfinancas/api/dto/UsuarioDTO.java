@@ -3,7 +3,7 @@ package com.flavio.minhasfinancas.api.dto;
 import lombok.Builder;
 
 @Builder
-public class UsuarioDTO {
+public class UsuarioDTO { 
 	private String email;
 	private String nome;
 	private String senha;
@@ -27,4 +27,5 @@ public class UsuarioDTO {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
 }

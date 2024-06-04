@@ -11,7 +11,6 @@ import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Setter;
 
-
 @Builder
 @Entity //faz com que o jpa reconheça essa classe como um mapeamento de uma entidade
 @Table( name = "usuario", schema = "financas")
@@ -34,6 +33,7 @@ public class Usuario {
 	
 	@Column (name = "senha")
 	private String senha;
+	
 
 
 	@Override
@@ -55,9 +55,6 @@ public class Usuario {
 				&& Objects.equals(senha, other.senha);
 	}
 
-	
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -109,11 +106,13 @@ public class Usuario {
 		return null;
 	}
 
+	public Object obterPorId(Usuario usuario) {
+		
+		return null;
+	}
 
 
 
 
-	
-	
-	
+
 }
